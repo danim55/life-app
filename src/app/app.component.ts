@@ -7,12 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  recipesSelected:boolean = true;
-  shoppingSelected:boolean = false;
+  loadedFeature: string = 'recipe';
 
-  onCondition(condition : {recipes: boolean, shopping: boolean}){
-    this.recipesSelected=condition.recipes;
-    this.shoppingSelected=condition.shopping;
+  onNavigate(feature: string){
+    this.loadedFeature=feature;
   }
 
 }
