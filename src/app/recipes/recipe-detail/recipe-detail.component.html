@@ -1,14 +1,18 @@
 <br>
 <div class="row">
     <div class="col-xs-12">
-        <img src="#" alt="" class="img-responsive">
+        <img 
+        [src]="recipeDetailed.imagePath" 
+        alt="{{recipeDetailed.name}}" 
+        class="img-responsive"
+        style="max-height: 300px;">
     </div>
 </div>
 
 <div class="row">
     <div class="col-xs-12">
         <h4>Name:</h4>
-        <h3>{{this.recipeDetailed.name}}</h3>
+        <h3>{{recipeDetailed.name}}</h3>
     </div>
 </div>
 <div class="row">
@@ -29,7 +33,7 @@
 <div class="row">
     <div class="col-xs-12">
         <h4>Description:</h4>
-        {{this.recipeDetailed.description}}
+        {{recipeDetailed.description}}
     </div>
 </div>
 <div class="row">
