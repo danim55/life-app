@@ -22,4 +22,8 @@ export class ShoppingListComponent implements OnInit {
     this.ingredients.push(ingredient);
   }
 
+  onClearList(){
+    this.ingredients = this.ingredients.slice(0,0);
+  }
+
 }
