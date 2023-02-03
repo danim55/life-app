@@ -19,6 +19,11 @@ export class ShoppingListService {
         this.ingredientsChanged.emit(this.ingredients.slice())
     }
 
+    addIngredients(ingredients: Ingredient[]){
+        this.ingredients.push(...ingredients);
+        this.ingredientsChanged.emit(this.ingredients.slice())
+    }
+
     onClearList() {
         this.ingredients = this.ingredients.slice(0, 0);
         this.ingredientsChanged.emit(this.ingredients.slice());
