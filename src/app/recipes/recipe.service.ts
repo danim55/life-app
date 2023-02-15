@@ -12,6 +12,7 @@ export class RecipeService {
 
     private recipes: Recipe[] = [
         new Recipe('Delicious Burguer',
+            1,
             'Some classic burguer',
             'https://c.pxhere.com/images/c8/c8/652bd1231b43ef2e00372ed23e45-1636310.jpg!d',
             [
@@ -19,6 +20,7 @@ export class RecipeService {
                 new Ingredient('Meat', 1)
             ]),
         new Recipe('Pizza',
+            2,
             'A carbonara pizza',
             'https://www.publicdomainpictures.net/pictures/40000/velka/fresh-pizza.jpg',
             [
@@ -30,6 +32,10 @@ export class RecipeService {
 
     getRecipes() {
         return this.recipes.slice();
+    }
+
+    getRecipeById(id: number){
+        return this.recipes.find((recipe) => recipe.id === id);
     }
 
     toShoppingList(ingredients: Ingredient[]){
