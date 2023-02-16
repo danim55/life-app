@@ -10,7 +10,7 @@ import { RecipeService } from '../recipe.service';
 })
 export class RecipeDetailComponent implements OnInit {
 
-  @Input() recipeDetailed: Recipe;
+  recipeDetailed: Recipe;
   auxId: number;
 
   constructor(
@@ -22,7 +22,7 @@ export class RecipeDetailComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.auxId = params['id']
-          this.recipeDetailed = this.recipeService.getRecipeById(+this.auxId);
+          this.recipeDetailed = this.recipeService.getRecipe(+this.auxId);
         }
       )
   }
