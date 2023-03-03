@@ -1,3 +1,4 @@
+import { NgForm } from "@angular/forms";
 import { Subject } from "rxjs";
 import { Ingredient } from "../shared/ingredient.model";
 
@@ -13,6 +14,15 @@ export class ShoppingListService {
 
     getIngredients(){
         return this.ingredients.slice();
+    }
+
+    getIngredient(index: number){
+        return this.ingredients[index];
+    }
+
+    onChangeIngredient(index: number, ingredient : NgForm){
+        this.ingredients[index].name = ingredient.value.name;
+        this.ingredients[index].amount = ingredient.value.amount;
     }
 
     onIngredientAdded(ingredient: Ingredient) {
