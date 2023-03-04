@@ -20,11 +20,6 @@ export class ShoppingListService {
         return this.ingredients[index];
     }
 
-    onChangeIngredient(index: number, ingredient : NgForm){
-        this.ingredients[index].name = ingredient.value.name;
-        this.ingredients[index].amount = ingredient.value.amount;
-    }
-
     onIngredientAdded(ingredient: Ingredient) {
         this.ingredients.push(ingredient);
         this.ingredientsChanged.next(this.ingredients.slice())
@@ -38,11 +33,6 @@ export class ShoppingListService {
     updateIngredient(index: number, newIngredient: Ingredient){
         this.ingredients[index] = newIngredient;
         this.ingredientsChanged.next(this.ingredients.slice())
-    }
-
-    onClearList() {
-        this.ingredients = this.ingredients.slice(0, 0);
-        this.ingredientsChanged.next(this.ingredients.slice());
     }
 
 }
