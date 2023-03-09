@@ -58,7 +58,7 @@
             <div class="row" style="margin-top: 5px">
                 <div class="col-xs-12">
                     <button class="btn btn-success" [disabled]="!recipeForm.valid" type="submit">Submit</button>
-                    <button class="btn btn-danger" type="button">Cancel</button>
+                    <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
                 </div>
             </div>
         </form>
