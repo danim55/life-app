@@ -5,3 +5,8 @@ button {
 .form-group {
     margin-top: 5px;
 }
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
