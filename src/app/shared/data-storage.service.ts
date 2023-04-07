@@ -20,4 +20,14 @@ export class DataStorageService {
                 console.log(response);
             });
     }
+
+    requestRecipes() {
+        this.http
+            .get(
+                'https://life-app-add1c-default-rtdb.europe-west1.firebasedatabase.app/recipes.json'
+            )
+            .subscribe((recipes: Recipe[]) => {
+                this.recipeService.setRecipes(recipes);
+            })
+    }
 }
