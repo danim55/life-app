@@ -11,23 +11,12 @@ export class RecipeService {
 
     constructor(private shoppingListService: ShoppingListService) { }
 
-    private recipes: Recipe[] = [
-        new Recipe('Delicious Burguer',
-            'Some classic burguer',
-            'https://c.pxhere.com/images/c8/c8/652bd1231b43ef2e00372ed23e45-1636310.jpg!d',
-            [
-                new Ingredient('Cheese', 2),
-                new Ingredient('Meat', 1)
-            ]),
-        new Recipe('Pizza',
-            'A carbonara pizza',
-            'https://www.publicdomainpictures.net/pictures/40000/velka/fresh-pizza.jpg',
-            [
-                new Ingredient('Cheese', 2),
-                new Ingredient('Tomato', 1),
-                new Ingredient('Bread', 3)
-            ]),
-    ];
+    private recipes: Recipe[] = [];
+
+    setRecipes(recipes: Recipe[]) {
+        this.recipes = recipes;
+        this.recipesChanged.next(this.recipes.slice())
+    }
 
     getRecipes() {
         return this.recipes.slice();
@@ -41,7 +30,7 @@ export class RecipeService {
         this.shoppingListService.addIngredients(ingredients);
     }
 
-    addRecipe(newRecipe: Recipe){
+    addRecipe(newRecipe: Recipe) {
         this.recipes.push(newRecipe);
         this.recipesChanged.next(this.recipes.slice())
     }
@@ -51,8 +40,8 @@ export class RecipeService {
         this.recipesChanged.next(this.recipes.slice())
     }
 
-    deleteRecipe(index: number){
-        this.recipes.splice(index,1);
+    deleteRecipe(index: number) {
+        this.recipes.splice(index, 1);
         this.recipesChanged.next(this.recipes.slice())
     }
 }
