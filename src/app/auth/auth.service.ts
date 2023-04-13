@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, throwError } from "rxjs";
+import { Subject, catchError, tap, throwError } from "rxjs";
+import { User } from "./user.model";
 
 export interface AuthResponse {
     idToken: string,
@@ -13,6 +14,9 @@ export interface AuthResponse {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+
+    user = new Subject<User>();
+
     constructor(private http: HttpClient) { }
 
     signUp(email: string, password: string) {
@@ -23,7 +27,17 @@ export class AuthService {
                 returnSecureToken: true,
             }
         )
-            .pipe(catchError(this.handleError))
+            .pipe(
+                catchError(this.handleError),
+                tap(responseData => {
+                    this.handleAuthentication(
+                        responseData.email,
+                        responseData.localid,
+                        responseData.idToken,
+                        +responseData.expiresIn,
+                    );
+                })
+            );
 
     }
 
@@ -35,7 +49,16 @@ export class AuthService {
                 returnSecureToken: true,
             }
         )
-            .pipe(catchError(this.handleError))
+            .pipe(
+                catchError(this.handleError),
+                tap(responseData => {
+                    this.handleAuthentication(
+                        responseData.email,
+                        responseData.localid,
+                        responseData.idToken,
+                        +responseData.expiresIn,
+                    );
+                }))
     }
 
     private handleError(errorResponse: HttpErrorResponse) {
@@ -66,5 +89,16 @@ export class AuthService {
         }
         return throwError(errorMessage);
 
+    }
+
+    private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
+        const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
+        const user = new User(
+            email,
+            userId,
+            token,
+            expirationDate,
+        )
+        this.user.next(user);
     }
 }
