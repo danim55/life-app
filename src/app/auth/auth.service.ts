@@ -16,6 +16,7 @@ export interface AuthResponse {
 export class AuthService {
 
     user = new Subject<User>();
+    token: string = null;
 
     constructor(private http: HttpClient) { }
 
@@ -100,5 +101,6 @@ export class AuthService {
             expirationDate,
         )
         this.user.next(user);
+        this.token = user.token;
     }
 }
