@@ -1,7 +1,7 @@
-import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthResponse, AuthService } from './auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertComponent } from '../alert/alert.component';
 import { PlaceHolderDirective } from '../shared/placeholder.directive';
@@ -11,9 +11,9 @@ import { PlaceHolderDirective } from '../shared/placeholder.directive';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent {
+export class AuthComponent implements OnDestroy {
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private router: Router,
     private componentFactoryResolver: ComponentFactoryResolver,
     private viewContainerRef: ViewContainerRef) { }
@@ -21,7 +21,10 @@ export class AuthComponent {
   isLoginMode: boolean = true;
   isLoading: boolean = false;
   error: string = null;
+
   @ViewChild(PlaceHolderDirective) alertHost: PlaceHolderDirective;
+
+  private closeSubscription: Subscription;
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -55,12 +58,18 @@ export class AuthComponent {
     form.reset();
   }
 
-  onHandleClose(){
+  onHandleClose() {
     this.error = null;
   }
 
-  private showErrorAlert(message: string){
-    this.alertHost.viewContainerRef.createComponent(AlertComponent);
+  private showErrorAlert(message: string) {
+
+    const componentRef = this.alertHost.viewContainerRef.createComponent(AlertComponent);
+    componentRef.instance.message = message;
+    this.closeSubscription = componentRef.instance.close.subscribe(() => {
+      this.closeSubscription.unsubscribe();
+      this.alertHost.viewContainerRef.clear();
+    })
 
     // Course option below
     // const alertComponentFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
@@ -70,6 +79,12 @@ export class AuthComponent {
 
     // hostViewContainerRef.createComponent(alertComponentFactory);
 
+  }
+
+  ngOnDestroy() {
+    if (this.closeSubscription) {
+      this.closeSubscription.unsubscribe();
+    }
   }
 
 }
