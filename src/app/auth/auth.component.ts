@@ -60,13 +60,15 @@ export class AuthComponent {
   }
 
   private showErrorAlert(message: string){
-    const alertComponent =  this.viewContainerRef.createComponent(AlertComponent);
-    const alertComponentFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
+    this.alertHost.viewContainerRef.createComponent(AlertComponent);
 
-    const hostViewContainerRef = this.alertHost.viewContainerRef;
-    hostViewContainerRef.clear()
+    // Course option below
+    // const alertComponentFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
 
-    hostViewContainerRef.createComponent(alertComponentFactory);
+    // const hostViewContainerRef = this.alertHost.viewContainerRef;
+    // hostViewContainerRef.clear()
+
+    // hostViewContainerRef.createComponent(alertComponentFactory);
 
   }
 
