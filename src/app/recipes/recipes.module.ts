@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "../app-routing.module";
 import { CommonModule } from "@angular/common";
 import { RecipesRouterModule } from "./recipes-router.module";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -22,7 +23,7 @@ import { RecipesRouterModule } from "./recipes-router.module";
     imports: [
         AppRoutingModule,
         ReactiveFormsModule,
-        CommonModule,
+        SharedModule,
         RecipesRouterModule,
     ]
 })
