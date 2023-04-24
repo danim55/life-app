@@ -1,7 +1,5 @@
 import { NgModule } from "@angular/core";
-import { AppRoutingModule } from "../app-routing.module";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 import { ShoppingListComponent } from "./shopping-list.component";
 import { ShoppingEditComponent } from "./shopping-edit/shopping-edit.component";
 import { RouterModule } from "@angular/router";

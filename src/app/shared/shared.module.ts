@@ -20,6 +20,7 @@ import { CommonModule } from "@angular/common";
         LoadingSpinnerComponent,
         PlaceHolderDirective,
         DropdownDirective,
+        CommonModule,
     ]
 })
 export class SharedModule {}
