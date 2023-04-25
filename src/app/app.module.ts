@@ -30,9 +30,8 @@ import { SharedModule } from './shared/shared.module';
     ShoppingListModule,
     SharedModule,
   ],
-  providers: [ShoppingListService, RecipeService, {
-    provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true
-  }],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
